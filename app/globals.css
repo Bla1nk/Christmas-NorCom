@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.card-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+}
+
+.card-left,
+.card-right {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  border-radius: 0;
+  transform-style: preserve-3d;
+  transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1),
+              opacity 0.8s ease-in-out 1.2s;
+  backface-visibility: hidden;
+  opacity: 1;
+}
+
+.card-left {
+  left: 0;
+  transform-origin: left center;
+  border-right: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.card-right {
+  right: 0;
+  transform-origin: right center;
+  border-left: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.card-container.opening .card-left {
+  transform: rotateY(-90deg);
+  opacity: 0;
+}
+
+.card-container.opening .card-right {
+  transform: rotateY(90deg);
+  opacity: 0;
+}
+
+.card-content {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1s ease-in-out 0.5s, transform 1s ease-in-out 0.5s;
+  z-index: 10;
+}
+
+.card-content.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.wish-item {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: white;
+  font-size: 1em;
+  animation: fall linear infinite;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fall {
+  0% {
+    top: -10%;
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    top: 110%;
+    transform: translateX(100px) rotate(360deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.santa-flying {
+  animation: flySanta 3s ease-in-out forwards;
+}
+
+@keyframes flySanta {
+  0% {
+    left: -128px;
+    top: 33.333%;
+    transform: rotate(-12deg) scale(1);
+  }
+  50% {
+    top: 20%;
+    transform: rotate(-8deg) scale(1.2);
+  }
+  100% {
+    left: calc(100vw + 128px);
+    top: 25%;
+    transform: rotate(-12deg) scale(1);
+  }
+}
+
+.fireworks {
+  overflow: hidden;
+}
+
+.firework {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: hsl(var(--hue) 90% 70%);
+  box-shadow:
+    0 0 0 0 hsl(var(--hue) 90% 70%),
+    0 -14px 0 2px hsl(var(--hue) 90% 70%),
+    0 14px 0 2px hsl(var(--hue) 90% 70%),
+    14px 0 0 2px hsl(var(--hue) 90% 70%),
+    -14px 0 0 2px hsl(var(--hue) 90% 70%),
+    10px -10px 0 2px hsl(var(--hue) 90% 70%),
+    -10px -10px 0 2px hsl(var(--hue) 90% 70%),
+    10px 10px 0 2px hsl(var(--hue) 90% 70%),
+    -10px 10px 0 2px hsl(var(--hue) 90% 70%);
+  filter: drop-shadow(0 0 8px hsl(var(--hue) 90% 70% / 0.8));
+  animation: fireworkExplode 1.6s ease-out forwards;
+}
+
+@keyframes fireworkExplode {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.9;
+  }
+  60% {
+    transform: scale(1.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
