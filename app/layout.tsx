@@ -1,38 +1,36 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Weihnachtsgruß für Kundinnen, Partner und Freunde',
-  description: 'Herzliche Weihnachtsgrüße und Dank für die Zusammenarbeit.',
+  metadataBase: new URL("https://norcom-weihnachten.de"),
+  title: "Weihnachtsgruß für Kundinnen, Partner und Freunde",
+  description: "Herzliche Weihnachtsgrüße und Dank für die Zusammenarbeit.",
   openGraph: {
-    title: 'Weihnachtsgruß für Kundinnen, Partner und Freunde',
-    description: 'Herzliche Weihnachtsgrüße und Dank für die Zusammenarbeit.',
+    title: "Weihnachtsgruß für Kundinnen, Partner und Freunde",
+    description: "Herzliche Weihnachtsgrüße und Dank für die Zusammenarbeit.",
+    url: "/",
+    type: "website",
     images: [
       {
-        url: 'https://bolt.new/static/og_default.png',
+        url: "/og.jpg", // liegt in /public/og.jpg
+        width: 1200,
+        height: 630,
+        alt: "NorCom Weihnachtsgruß",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Weihnachtsgruß für Kundinnen, Partner und Freunde',
-    description: 'Herzliche Weihnachtsgrüße und Dank für die Zusammenarbeit.',
-    images: [
-      {
-        url: 'https://bolt.new/static/og_default.png',
-      },
-    ],
+    card: "summary_large_image",
+    title: "Weihnachtsgruß für Kundinnen, Partner und Freunde",
+    description: "Herzliche Weihnachtsgrüße und Dank für die Zusammenarbeit.",
+    images: ["/og.jpg"],
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de">
       <body className={inter.className}>{children}</body>
